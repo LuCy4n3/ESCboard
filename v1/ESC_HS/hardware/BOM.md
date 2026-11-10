@@ -65,7 +65,7 @@ schematic/PCB files have not been altered.
 
 ## Regenerate CSV and report
 
-From the repository root in PowerShell:
+From the `v1/ESC_HS/` project directory in PowerShell:
 
 ```powershell
 New-Item -ItemType Directory -Force captures

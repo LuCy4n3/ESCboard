@@ -1,9 +1,9 @@
 # STM32CubeIDE generated build trees and workspace state
-/Debug/
-/Release/
-/build/
-/.metadata/
-/.settings/language.settings.xml
+Debug/
+Release/
+build/
+.metadata/
+**/.settings/language.settings.xml
 *.launch
 *.log
 
@@ -32,7 +32,7 @@
 venv/
 __pycache__/
 *.py[cod]
-/captures/
+captures/
 
 # KiCad per-user state, automatic backups and caches
 *.kicad_prl

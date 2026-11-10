@@ -234,7 +234,7 @@ def write_report(path, data):
               "layout DRC, device-rating approval or hardware validation. Firmware and",
               "schematic/PCB files have not been altered.", "",
               "## Regenerate CSV and report", "",
-              "From the repository root in PowerShell:", "", "```powershell",
+              "From the `v1/ESC_HS/` project directory in PowerShell:", "", "```powershell",
               "New-Item -ItemType Directory -Force captures",
               "& 'C:\\Program Files\\KiCad\\8.0\\bin\\kicad-cli.exe' sch export netlist --format kicadxml --output captures/bom_netlist.xml esc_design/esc_design.kicad_sch",
               "python tools/export_bom.py --netlist captures/bom_netlist.xml --pcb esc_design/esc_design.kicad_pcb --out hardware/bom_data.json --csv",
