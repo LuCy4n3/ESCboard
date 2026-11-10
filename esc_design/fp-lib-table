@@ -1,0 +1,4 @@
+(fp_lib_table
+  (version 7)
+  (lib (name "IRFS7530PbF")(type "KiCad")(uri "${KIPRJMOD}/IRFS7530PbF.pretty")(options "")(descr ""))
+)

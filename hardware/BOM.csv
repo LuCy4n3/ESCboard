@@ -1,0 +1,37 @@
+﻿Quantity,References,Value,Footprint,Symbol,Manufacturer,MPN,Datasheet,Sheets,Notes
+16,"C1, C2, C3, C5, C7, C9, C10, C11, C15, C18, C20, C21, C22, C23, C24, C25",100n,Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder,Device:C,,,,"/Current Sensing/, /DeMUX/, /Eeprom/, /LDO5v/, /MCU/",
+2,"C4, C16",10u,Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder,Device:C,,,,"/LDO5v/, /MCU/",
+3,"C6, C8, C17",1u,Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder,Device:C,,,,/MCU/,
+3,"C12, C13, C14",4n7,Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder,BLDC_4-rescue:C-RESCUE-BLDC_4,,,,/HallSensorsFilters/,
+1,C19,220u,Capacitor_THT:CP_Radial_D12.5mm_P5.00mm,Device:C_Polarized_Small_US,,,,/,
+3,"Cboot1, Cboot2, Cboot3",1u,Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder,Device:C,,,,/MCU/,
+4,"CM1, CM2, CM3, CM4",220n,Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder,Device:C,,,,"/Inverter/, /MCU/",
+1,Cout1,10u,Capacitor_SMD:C_1206_3216Metric,Device:C,,,,/MCU/,
+7,"D1, D2, D3, D4, D5, D6, D7",D,Diode_SMD:D_1206_3216Metric_Pad1.42x1.75mm_HandSolder,Device:D,,,,/LedArray/,Exact value/part requires selection
+2,"J1, J3",Conn_01x05_Pin,Connector_PinSocket_2.54mm:PinSocket_1x05_P2.54mm_Vertical,Connector:Conn_01x05_Pin,,,,/,
+1,J2,Conn_01x07_Pin,Connector_PinSocket_2.54mm:PinSocket_1x07_P2.54mm_Vertical,Connector:Conn_01x07_Pin,,,,/,
+1,JP4,Jumper_2_Bridged,TestPoint:TestPoint_2Pads_Pitch2.54mm_Drill0.8mm,Jumper:Jumper_2_Bridged,,,,/MCU/,
+1,L1,WE-PD2_3521,WE-PD2_3521:WE-PD2_3521,WE-PD2_3521:WE-PD2_3521,,,,/MCU/,Exact value/part requires selection
+5,"P1, P2, P3, P4, P5",~,Connector_PCBEdge:Conn_Power,Connector:Conn_Power,,,,/,PCB copper connection pad; no separate component to purchase
+6,"Q1, Q2, Q3, Q4, Q5, Q6",~,IRFS7530PbF:IRFS7530PBF,components:IRFB7530PbF,,,,/Inverter/,Missing component value; Symbol IRFB7530PbF vs footprint IRFS7530PBF: confirm package/part
+1,Q7,SQ3427CEV-T1_GE3,Package_TO_SOT_SMD:SOT-23,Transistor_FET:Si2319CDS,,,http://www.vishay.com/docs/66709/si2319cd.pdf,/DeMUX/,Value SQ3427CEV vs symbol/datasheet Si2319CDS: confirm selected device
+1,Q8,BSS138,Package_TO_SOT_SMD:SOT-23,Transistor_FET:BSS138,,,https://www.onsemi.com/pub/Collateral/BSS138-D.PDF,/DeMUX/,
+9,"R3, R5, R43, R58, R59, R64, R65, R69, R70",20k,Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder,Device:R,,,,"/Current Sensing/, /LedArray/, /MCU/",
+19,"R4, R21, R22, R23, R28, R29, R30, R35, R36, R37, R51, R52, R53, R57, R60, R62, R63, R67, R68",1k,Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder,Device:R,,,,"/Current Sensing/, /HallSensorsFilters/, /MCU/",
+10,"R6, R45, R46, R47, R48, R49, R50, R61, R66, R71",10k,Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder,Device:R,,,,"/Current Sensing/, /Eeprom/, /HallSensorsFilters/, /MCU/",
+6,"R7, R8, R10, R11, R13, R14",10,Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder,Device:R,,,,/Inverter/,
+12,"R9, R12, R15, R19, R20, R26, R27, R33, R55, R72, R73, R74",100k,Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder,Device:R,,,,"/Current Sensing/, /Inverter/, /MCU/",
+1,R16,R,Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder,Device:R,,,,/Temp_meas/,Exact value/part requires selection
+1,R17,R,OptoDevice:R_LDR_4.9x4.2mm_P2.54mm_Vertical,Device:R,,,,/Temp_meas/,Exact value/part requires selection
+3,"R18, R25, R32",50k,Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder,Device:R,,,,/Current Sensing/,
+3,"R24, R31, R38",WSLP27265L000FEA,WSLP27265L000FEA:RES_WSLP2726L2000FEA,WSLP27265L000FEA:WSLP2726L2000FEA,,,,/Current Sensing/,
+1,R34,100k,Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder,Device:R,,,,/Current Sensing/,Duplicate PCB reference (2 footprints); schematic quantity retained
+6,"R39, R40, R41, R42, R44, R54",330,Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder,Device:R,,,,/LedArray/,
+1,R56,150,Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder,Device:R,,,,/MCU/,
+1,S1,TS04-66-43-BK-100-SMT-TR,TS04-66-43-BK-100-SMT-TR:SW_TS04-66-43-BK-100-SMT-TR,TS04-66-43-BK-100-SMT:TS04-66-43-BK-100-SMT-TR,,,,/MCU/,
+1,U1,STSPIN32G4,STSPIN32G4:QFN50P900X900X100-65N,STSPIN32G4:STSPIN32G4,,,,/MCU/,
+1,U2,STPS1H100AY,SMA_STM,STPS1H100AY:STPS1H100AY,,,https://www.st.com/resource/en/datasheet/stps1h100-y.pdf,/MCU/,Schematic/PCB footprint mismatch
+3,"U3, U4, U5",MAX74810ARMZ-RL,MAX74810ARMZ:MAX74810ARMZ_ADI,MAX74810ARMZ:MAX74810ARMZ-RL,,,MAX74810ARMZ-RL,/Current Sensing/,
+2,"U6, U7",TMUX6136PWR,TMUX6136:SOP65P640X120-16N,TMUX6136:TMUX6136PWR,,,,/DeMUX/,
+1,U9,LD1117S50TR,LD1117S50TR:SOT230P700X180-4N,LD1117S50TR:LD1117S50TR,STMicroelectronics,LD1117S50TR,,/LDO5v/,
+1,U10,93LCxxBxxOT,Package_TO_SOT_SMD:SOT-23-6,Memory_EEPROM:93LCxxBxxOT,,,http://ww1.microchip.com/downloads/en/DeviceDoc/20001749K.pdf,/Eeprom/,Exact value/part requires selection

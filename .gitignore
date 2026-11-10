@@ -1,0 +1,45 @@
+# STM32CubeIDE generated build trees and workspace state
+/Debug/
+/Release/
+/build/
+/.metadata/
+/.settings/language.settings.xml
+*.launch
+*.log
+
+# Compiler/linker output
+*.o
+*.d
+*.su
+*.cyclo
+*.elf
+*.hex
+*.bin
+*.map
+*.list
+*.a
+
+# Local source snapshots and editor backups; keep the active .c/.h files
+*.orig
+*.pre_zc
+*.bak
+*~
+*.swp
+*.swo
+
+# Python environments and generated captures
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+/captures/
+
+# KiCad per-user state, automatic backups and caches
+*.kicad_prl
+*.lck
+*-backups/
+*.kicad_sch-bak
+*.kicad_pcb-bak
+fp-info-cache
+~_autosave-*
+*.inspect.ndjson

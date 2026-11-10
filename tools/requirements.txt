@@ -1,0 +1,3 @@
+# Serial acquisition and numerical capture summaries
+pyserial
+numpy
