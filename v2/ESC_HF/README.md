@@ -4,6 +4,9 @@
 STM32H750 and DRV8323, with a separate schematic and PCB from
 [ESC_HS v1](../../v1/ESC_HS/README.md).
 
+This is an experimental hardware development build. Its controller and peripheral
+mapping need a dedicated firmware implementation and bench validation.
+
 ## Contents
 
 | Path | Contents |

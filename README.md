@@ -3,6 +3,11 @@
 This repository contains two generations of the ESC project. The repository name
 remains `ESC_HS`. The original project names `ESC_HS` and `ESC_HF` are unchanged.
 
+Both generations are experimental development builds. v1 includes firmware for
+bench research and hardware bring-up; v2 is a hardware design with firmware still
+to be implemented. See the [experimental build notes](v1/ESC_HS/EXPERIMENTAL_BUILD.md)
+for the current v1 diagnostic configuration and validation limits.
+
 | Version | Project | Contents | Documentation |
 | --- | --- | --- | --- |
 | v1 | `ESC_HS` | STSPIN32G4/STM32G431 firmware, matching KiCad design, capture tools and BOM. | [v1 usage](v1/ESC_HS/README.md) |

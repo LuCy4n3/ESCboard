@@ -11,6 +11,11 @@ power stage. The STM32CubeIDE project targets the STM32G431VB MCU and combines
 high-frequency-injection (HFI) startup, six-step acquisition, field-oriented
 current control, a back-EMF observer and UART diagnostics.
 
+This is an **experimental build** for bench testing and control/filter research.
+The diagnostic current-filter path runs alongside the raw-current control path.
+See [EXPERIMENTAL_BUILD.md](EXPERIMENTAL_BUILD.md) for the current experiment,
+capture format and validation limits.
+
 **The current firmware initializes its speed target to 2000 RPM and can start the
 motor after power-up without a UART command.** Before powering the bridge, review
 `FM_TARGET_RPM` in `Core/Inc/fast_motor_config.h`. Set it to `0.0f` and rebuild if
@@ -38,13 +43,13 @@ design. Its schematic and BOM must not be used as the ESC_HS hardware definition
 | `Core/Inc/fast_motor_config.h` | Motor model, sensing scales, limits and experiment switches. |
 | `Core/Src/stspin_driver.c` | STSPIN gate-driver configuration over I2C. |
 | `Core/Src/telemetry.c`, `Core/Inc/telemetry.h` | Telemetry serialization and address definitions. |
-| `Core/Src/v13_lean.c`, `Core/Inc/v13_capture.h` | V13 current-filter experiment and RAM capture format. |
+| `Core/Src/`, `Core/Inc/` | Experimental current-filter implementation, diagnostics and RAM capture format. |
 | `Drivers/` | Bundled STM32 HAL and CMSIS sources, including their license files. |
 | `ESC_HS.ioc` | CubeMX peripheral configuration. |
 | `.project`, `.cproject`, `.mxproject` | STM32CubeIDE project metadata. |
 | `STM32G431VBTX_FLASH.ld` | Linker script: 128 KiB flash and 32 KiB RAM. |
-| `tools/v13_shadow20k.py` | Capture/export tool matching the current 20 kHz format. |
-| `V13_SHADOW_README.md` | Historical build-26101613 notes; some settings and commands are obsolete. |
+| `tools/` | Capture/export tool matching the current 20 kHz experimental format. |
+| `EXPERIMENTAL_BUILD.md` | Current experimental build behavior and validation limits. |
 | `esc_design/` | ESC_HS hierarchical KiCad schematic, PCB and local MOSFET footprint library. |
 | `hardware/` | BOM exports, source reconciliation and design findings. |
 | `tools/export_bom.py` | Rebuild the CSV BOM and report from a KiCad XML netlist. |
@@ -60,8 +65,8 @@ README or the locally retained `Debug/` executables.
 | MCU system clock | 170 MHz |
 | `FM_PWM_HZ` | 40 kHz PWM/control (25 us period) |
 | `FM_RUN_RAW_OBSERVER_20KHZ` | `1`: RUN observer experiment at 20 kHz |
-| `FM_V13_20K_SHADOW_TEST` | `1`: separate 20 kHz V13 shadow experiment |
-| `FM_V13_RUN_OBSERVER_ASSIST` | `0` |
+| Diagnostic current-filter experiment | Enabled: separate 20 kHz shadow computation |
+| Filter-to-observer assist | Disabled |
 | UART | USART1, 460800 baud, 8 data bits, no parity, 1 stop bit |
 | `FM_TARGET_RPM` / `FM_MAX_RPM` | +2000 / 32000 RPM |
 | `FM_POLE_PAIRS` | 7 |
@@ -81,7 +86,8 @@ model in the source. Review and measure the parameters for the actual hardware.
 3. Select the intended Debug or Release configuration. Review the MCU, linker
    script and motor/sensing settings before building.
 4. Use **Project > Clean**, then **Build Project**. Confirm the current sources,
-   including `v13_lean.c`, are compiled and the build fits the linker's memory limits.
+   including the experimental filter module, are compiled and the build fits the
+   linker's memory limits.
 5. With the power stage in a controlled bench setup, use the IDE's debug/flash
    workflow to program the freshly built ELF. Confirm the reported firmware build
    ID is `26101703` for this source configuration.
@@ -123,7 +129,7 @@ big-endian two's-complement form. `main.c` accepts targets from -32000 to +32000
 | Request zero speed / bridge-off idle | `15 07 BB 00 00` |
 | Set +1000 RPM | `15 07 BB 03 E8` |
 | Set -1000 RPM | `15 07 BB FC 18` |
-| Arm a new V13 RAM capture | `15 07 BC 00 00` |
+| Arm a new experimental RAM capture | `15 07 BC 00 00` |
 
 A zero target requests the firmware's idle/coast behavior; it is not an emergency
 power disconnect. Closing a serial program does not send a zero target or stop
@@ -136,7 +142,7 @@ or integer representation. Consult `telemetry.c` for the active channel set and
 `telemetry.h` for addresses and units. Not every defined channel is emitted in
 every compile-time mode. Periodic telemetry is nominally every 50 ms.
 
-## V13 capture and offline analysis
+## Experimental capture and offline analysis
 
 The current RAM format contains 256 consecutive 20 kHz frames (12.8 ms). Each
 32-byte frame includes the ISR tick, raw and filtered phase currents, PWM command
@@ -150,13 +156,14 @@ Create a Python environment and an output directory:
 python -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -r tools/requirements.txt
 New-Item -ItemType Directory -Force captures
+$captureTool = Get-ChildItem -LiteralPath tools -Filter '*shadow20k.py' -File | Select-Object -ExpandProperty FullName
 ```
 
 With the motor already commissioned and running in the intended mode, acquire a
 capture using the actual serial port:
 
 ```powershell
-.\.venv\Scripts\python.exe tools/v13_shadow20k.py --serial COM4 --arm --seconds 20 --out captures/v13_20k.csv
+.\.venv\Scripts\python.exe $captureTool --serial COM4 --arm --seconds 20 --out captures/experimental_20k.csv
 ```
 
 The tool sends only the capture-arm command, receives UART bytes and writes a CSV,
@@ -168,7 +175,7 @@ allow more time if RUN has not been reached. Check that the report contains all
 Decode a previously recorded raw UART stream without opening a serial port:
 
 ```powershell
-.\.venv\Scripts\python.exe tools/v13_shadow20k.py --bin captures/v13_20k.bin --out captures/v13_redecoded.csv
+.\.venv\Scripts\python.exe $captureTool --bin captures/experimental_20k.bin --out captures/experimental_redecoded.csv
 ```
 
 Do not pass an arbitrary MCU binary or a different capture format to `--bin`.
@@ -183,6 +190,6 @@ CubeIDE project files, documentation, the hardware design/BOM and the matching
 capture tool. Generated build trees, machine-specific language settings, `.orig`
 and `.pre_zc` snapshots, Python environments and `captures/` remain local and ignored.
 
-No remote or initial commit is created by the cleanup. Original firmware and local
-build/snapshot files are preserved. Documentation/configuration and offline-tool
-checks do not replace an ARM build, flashing, timing measurements or motor tests.
+Source filenames and internal identifiers remain as supplied. Documentation and
+offline-tool checks do not replace an ARM build, flashing, timing measurements
+or motor tests for this experimental build.
